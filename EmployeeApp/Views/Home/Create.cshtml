@@ -1,0 +1,76 @@
+﻿@model EmployeeViewModel
+
+@{
+    ViewBag.Title = "Apply for visa";
+}
+
+<form enctype="multipart/form-data" asp-controller="Home" asp-action="Create" method="post">
+    <div class="form-group row">
+
+     <label asp-for="NameofProduct" class="col-sm-2 col-form-label"></label>
+
+     <div class="col-sm-10">
+    <input asp-for="NameofProduct" class="form-control" placeholder="Product Name" />
+    <span asp-validation-for="NameofProduct" class="text-danger"></span>
+
+     </div>
+    </div>
+
+     <div class="form-group row">
+
+     <label asp-for="Description" class="col-sm-2 col-form-label"></label>
+
+     <div class="col-sm-10">
+    <input asp-for="Description" class="form-control" placeholder="Description" />
+    <span asp-validation-for="Description" class="text-danger"></span>
+
+     </div>
+    </div>
+
+
+     <div class="form-group row">
+
+     <label asp-for="Department" class="col-sm-2 col-form-label"></label>
+
+     <div class="col-sm-10">
+    <select asp-for="Department" class="custom-select mr-sm-2" asp-items="Html.GetEnumSelectList<Dept>()"></select>
+
+     </div>
+    </div>
+
+   <div class="form-group row">
+
+        <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
+     <div class="col-sm-10">
+       <div class="custom-file">
+          <input multiple asp-for="Photo" class="form-control custom-file-input" placeholder="Photo" />
+           <label class="custom-file-label">Choose File....</label>
+        
+      </div>
+     </div>
+   </div>
+
+    <div>
+        <button type="submit">Create</button>
+    </div>
+
+    @section Scripts{
+        <script>
+            $(document).ready(function () {
+                $(".custom-file-input").on("change", function() {
+                        var fileLabel = $(this).next(".custom-file-label");
+                    var files = $(this)[0].files;
+                    if(files.length > 1)
+                    {
+                        fileLabel.html(files.length + "files selected");
+                    }
+                    else if(files.length == 1)
+                    {
+                        fileLabel.html(files[0].name); 
+                    }
+                });
+            });
+        </script>
+    }
+   
+</form>
